@@ -1,0 +1,13 @@
+{
+  "name": "Saalat Time",
+  "description": "Shows Saalat Time for a selected year and month",
+  "launch_path": "/index.html",
+  "icons": {
+    "128": "/img/icon-128.png"
+  },
+  "developer": {
+    "name": "Sumon Selim",
+    "url": "http://www.sumonselim.com"
+  },
+  "default_locale": "en"
+}

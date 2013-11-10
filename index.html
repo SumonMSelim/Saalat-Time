@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Saalat Time</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" href="css/jquery.mobile-1.1.1.min.css" />
+        <script src="js/jquery-1.7.1.min.js"></script>
+        <script src="js/jquery.mobile-1.1.1.min.js"></script>
+        <script type="text/javascript">             
+                     
+            function load() {
+            var lng = 90;
+            var lat = 24;           
+            //var yy = 2013;
+            var yy = $('#year').val();
+            //var mm = 11;
+            var mm = $('#month').val();
+            var gmt = 6;
+            var date = mm+"/"+yy;
+            var url = "http://www.corsproxy.com/api.xhanch.com/islamic-get-prayer-time.php?lng="+lng+"&lat="+lat+"&yy="+yy+"&mm="+mm+"&gmt="+gmt+"&m=json";
+            $.getJSON( url, function(obj) {
+                var i =1;                
+                $.each(obj, function(key, value) {                    
+                    var Fajr = "<br/>Fajr: "+value.fajr;
+                    var Zuhr = "<br/>Zuhr: "+value.zuhr;
+                    var Asr = "<br/>Asr: "+value.asr;
+                    var Maghrib = "<br/>Maghrib: "+value.maghrib;
+                    var Isha = "<br/>Isha: "+value.isha;
+                    var data = i+"/"+date+""+Fajr+" "+Zuhr+" "+Asr+" "+Maghrib+" "+Isha;
+                    $("#saalat-time").append("<li>"+data+"</li>");
+                    i++;
+                });
+                $("#saalat-time").listview("refresh");
+            });
+          }
+
+	</script>
+    </head>
+    <body>
+
+        <div data-role="page" data-theme="c" id="page-saalat-time">
+            <div data-role="header" data-theme="b">
+                <h1>Saalat Time</h1>
+                <form>
+                    <label for="year">Year</label>
+                    <input id="year" type="text" value="2013">
+                    <label for="month">Month</label>
+                    <input id="month" type="text" value="11">
+                    <button id="load-button" data-inline="true" onClick="load()">Get Saalat Time</button>
+                </form>
+            </div>
+            <div data-role="content">
+                <ul id="saalat-time" data-role="listview" data-inset="false">
+                    <h2 id="title"></h2>
+                </ul>
+            </div>
+        </div>
+
+    </body>
+</html>
